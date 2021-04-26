@@ -12,22 +12,27 @@
 
     <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>Validar usuario</ion-card-subtitle>
+        <ion-card-subtitle>Carga QR</ion-card-subtitle>
         <ion-card-title>Ingrese sus datos</ion-card-title>
       </ion-card-header>
     
       <ion-card-content>
         <ion-item>
-          <ion-label>Usuario: </ion-label>
+          <ion-label position="fixed">Usuario</ion-label>
           <ion-input type="text" [(ngModel)]="user"></ion-input>
-        </ion-item>
+        </ion-item><br>
+        
         <ion-item>
-          <ion-label>Contraseña: </ion-label>
+          <ion-label position="fixed">Contraseña</ion-label>
           <ion-input type="password" [(ngModel)]="pass"></ion-input>
-        </ion-item> 
+        </ion-item><br>
+      
       </ion-card-content>
-      <ion-button color="primary" expand="block" (click)="login()" >Ingresar</ion-button>
+      <ion-button color="Warning" expand="block" (click)="login()" expand="full" fill="outline">
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        Ingresar</ion-button>
     </ion-card>
+
 
   </div>
 
