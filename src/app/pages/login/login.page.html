@@ -8,9 +8,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <div style="height: 60%; display: flex; align-items: center; justify-content: center;">
+  <div style="height: 40%; display: flex; align-items: center; justify-content: center;">
 
-    <ion-card>
+    <ion-card class="card-contain">
       <ion-card-header>
         <ion-card-subtitle>Carga QR</ion-card-subtitle>
         <ion-card-title>Ingrese sus datos</ion-card-title>
@@ -19,7 +19,7 @@
       <ion-card-content>
         <form class="form" [formGroup]="loginForm" (ngSubmit)="submit()">
           <ion-item>
-            <ion-label position="fixed">Usuario</ion-label>
+            <ion-label position="fixed">Correo Electrónico</ion-label>
             <ion-input formControlName="correo" name="correo" type="text" [(ngModel)]="user"></ion-input>
           </ion-item>
           <div *ngFor="let error of errorMessages.correo">

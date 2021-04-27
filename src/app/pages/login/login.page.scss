@@ -1,0 +1,13 @@
+.error-message{
+    color: var(--ion-color-danger);
+}
+
+ion-content{
+    --background: url(../../../assets/home.png);
+    background-size: cover !important;
+    -webkit-background-size: cover !important;
+}
+
+.card-contain {
+    background: rgba(255,255,255,0.5);
+}
