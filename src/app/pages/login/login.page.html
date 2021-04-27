@@ -15,22 +15,33 @@
         <ion-card-subtitle>Carga QR</ion-card-subtitle>
         <ion-card-title>Ingrese sus datos</ion-card-title>
       </ion-card-header>
-    
+
       <ion-card-content>
-        <ion-item>
-          <ion-label position="fixed">Usuario</ion-label>
-          <ion-input type="text" [(ngModel)]="user"></ion-input>
-        </ion-item><br>
-        
-        <ion-item>
-          <ion-label position="fixed">Contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="pass"></ion-input>
-        </ion-item><br>
-      
+        <form class="form" [formGroup]="loginForm" (ngSubmit)="submit()">
+          <ion-item>
+            <ion-label position="fixed">Usuario</ion-label>
+            <ion-input formControlName="correo" name="correo" type="text" [(ngModel)]="user"></ion-input>
+          </ion-item>
+          <div *ngFor="let error of errorMessages.correo">
+            <ng-container *ngIf="correo.hasError(error.type) && (correo.dirty || correo.touched)">
+              <small class="error-message">{{error.message}}</small>
+            </ng-container>
+          </div><br>
+          <ion-item>
+            <ion-label position="fixed">Contraseña</ion-label>
+            <ion-input formControlName="clave" name="clave" type="password" [(ngModel)]="pass"></ion-input>
+          </ion-item>
+          <div *ngFor="let error of errorMessages.clave">
+            <ng-container *ngIf="clave.hasError(error.type) && (clave.dirty || clave.touched)">
+              <small class="error-message">{{error.message}}</small>
+            </ng-container>
+          </div><br>
+        </form>
       </ion-card-content>
-      <ion-button color="Warning" expand="block" (click)="login()" expand="full" fill="outline">
+      <ion-button [disabled]="!loginForm.valid" color="Warning" expand="block" (click)="login()" expand="full" fill="outline">
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        Ingresar</ion-button>
+        Ingresar
+      </ion-button>
     </ion-card>
 
 
