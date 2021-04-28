@@ -9,6 +9,10 @@
   </ion-header>
 
   <div style="height: 40%; display: flex; align-items: center; justify-content: center;">
+    <app-select [disabled]="botonAcceso" (userSelected)="userSelected($event)"></app-select>
+  </div>
+
+  <div style="height: 30%; display: flex; align-items: center; justify-content: center;">
 
     <ion-card class="card-contain">
       <ion-card-header>
@@ -19,7 +23,7 @@
       <ion-card-content>
         <form class="form" [formGroup]="loginForm" (ngSubmit)="submit()">
           <ion-item>
-            <ion-label position="fixed">Correo Electrónico</ion-label>
+            <ion-label position="floating">Correo Electrónico</ion-label>
             <ion-input formControlName="correo" name="correo" type="text" [(ngModel)]="user"></ion-input>
           </ion-item>
           <div *ngFor="let error of errorMessages.correo">
@@ -28,7 +32,7 @@
             </ng-container>
           </div><br>
           <ion-item>
-            <ion-label position="fixed">Contraseña</ion-label>
+            <ion-label position="floating">Contraseña</ion-label>
             <ion-input formControlName="clave" name="clave" type="password" [(ngModel)]="pass"></ion-input>
           </ion-item>
           <div *ngFor="let error of errorMessages.clave">
@@ -41,6 +45,12 @@
       <ion-button [disabled]="!loginForm.valid" color="Warning" expand="block" (click)="login()" expand="full" fill="outline">
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
         Ingresar
+      </ion-button>
+      <ion-button  color="secondary" expand="full" fill="outline" (click)="accesoRapido()" *ngIf="botonAcceso">
+        <ion-icon name="finger-print-outline" slot="end"></ion-icon>Acceso Rápido
+      </ion-button>
+      <ion-button  color="danger" expand="block" (click)="accesoRapido()" *ngIf="!botonAcceso">
+        <ion-icon name="close-outline" slot="end"></ion-icon>Cancelar 
       </ion-button>
     </ion-card>
 

@@ -12,6 +12,7 @@ export class LoginPage implements OnInit {
 
   user: string;
   pass: string;
+  botonAcceso: boolean;
   loginForm = this.formBuider.group({
     correo: ['', 
     [
@@ -23,7 +24,7 @@ export class LoginPage implements OnInit {
     
       Validators.required,
       Validators.maxLength(20),
-      Validators.minLength(6)
+      Validators.minLength(4)
     ]]
   })
 
@@ -42,11 +43,12 @@ export class LoginPage implements OnInit {
     clave: [
      { type: 'required', message: 'La clave es obligatoria' },
      { type: 'maxlength', message: 'La clave no puede tener mas de 20 caracteres' },
-     { type: 'minlength', message: 'La clave no puede tener menos de seis caracteres' } ],
+     { type: 'minlength', message: 'La clave no puede tener menos de cuatro caracteres' } ],
  }
   constructor(private auth: AuthService, private formBuider: FormBuilder, private alertController: AlertController) { }
 
   ngOnInit() {
+    this.botonAcceso = true;
   }
 
   async login() {
@@ -54,6 +56,11 @@ export class LoginPage implements OnInit {
     if(validation == 1){
       this.noValidado();
     }
+  }
+
+  accesoRapido() {
+    this.limpiarInputs();
+    this.botonAcceso = !this.botonAcceso;
   }
 
   async noValidado() {
@@ -69,5 +76,17 @@ export class LoginPage implements OnInit {
     const { role } = await alert.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
+
+  userSelected(e) {
+    this.user = e.correo;
+    this.pass = e.clave;
+    this.botonAcceso = !this.botonAcceso;
+  }
+
+  limpiarInputs(){
+    this.user = null;
+    this.pass = null;
+  }
+
 
 }

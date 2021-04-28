@@ -1,0 +1,21 @@
+<ion-card class="card-contain">
+  <ion-card-header>
+    <ion-card-title>Selección de Usuario</ion-card-title>
+  </ion-card-header>
+
+
+  <ion-card-content>
+    
+    <ion-item>
+      <ion-label>Usuarios</ion-label>
+      <ion-select ok-text="Aceptar" cancel-text="Volver" [disabled]="disabled" (ionChange)="onChange($event)">
+        <div *ngFor="let user of users">
+          <ng-container>
+            <ion-select-option [value]="user.id">{{user.id}} - {{user.perfil}}</ion-select-option>
+          </ng-container>
+        </div>
+      </ion-select>
+    </ion-item>
+  </ion-card-content>
+
+</ion-card>
