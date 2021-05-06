@@ -19,6 +19,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   result = null;
   scanActive = false;
+  style= "url(../../../assets/home.png)";
 
   public mostrar = true;
   public creditoActual: number = 0;
@@ -59,10 +60,21 @@ export class HomePage implements OnInit, OnDestroy {
       this.scanActive = true;
       BarcodeScanner.hideBackground();
       const result = await BarcodeScanner.startScan();
+
       if(result.content){
         this.result = result.content;
-        alert(this.result);
         this.scanActive = false;
+        switch (this.result) { 
+          case "8c95def646b6127282ed50454b73240300dccabc":
+            this.ValidarCodigoUnico(new Creditos(this.usuarioActual, 10, this.result));
+            break;
+          case "2786f4877b9091dcad7f35751bfcf5d5ea712b2f":
+            this.ValidarCodigoUnico(new Creditos(this.usuarioActual, 100, this.result));
+            break;
+          default: 
+          this.ValidarCodigoUnico(new Creditos(this.usuarioActual, 50, this.result));
+        }
+
       }
     }
     
@@ -101,9 +113,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ValidarCodigoUnico(objCredito: Creditos) {
-    
     this.obtenerDatos();
-
     if (this.usuarioActual !== 'admin') {      
       
       if(this.creditos.length == 0) {
@@ -130,13 +140,6 @@ export class HomePage implements OnInit, OnDestroy {
         
         this.creditos.forEach(resp => {  
 
-        //  if (resp.codigo != objCredito.codigo && this.ContarCargasDeAdmin(this.creditosPorUsuario, resp.codigo)) {
-        //   this.guardarCredito(objCredito);
-        //   exit();  
-        // } else if (resp.codigo == objCredito.codigo && this.ContarCargasDeAdmin(this.creditosPorUsuario, resp.codigo)) {
-        //   this.guardarCredito(objCredito);
-        //   exit();       
-        // } else
          if (resp.codigo == objCredito.codigo && !this.ContarCargasDeAdmin(this.creditos, resp.codigo)) {
           this.CargaDuplicada('No puede cargar TRES veces el mismo código');
           exit();
@@ -149,7 +152,6 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ContarCargasDeAdmin(creditosAdmin: Array<Creditos>, codigo:string): boolean {
-
     var contadorDeCargasDeCreditoAdmin = 0;
     creditosAdmin.forEach(resp => {
      
@@ -167,7 +169,6 @@ export class HomePage implements OnInit, OnDestroy {
 
 
   guardarCredito(objetoCredito: Creditos) {
-
     var usuariosRef = firebase.default.database().ref('creditos/' + objetoCredito.usuario);
     usuariosRef.push({ usuario: objetoCredito.usuario, 
                        codigo: objetoCredito.codigo,
@@ -183,9 +184,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   obtenerDatos() {
       this.creditos = new Array<Creditos>();
-   
       var starCountRef = firebase.default.database().ref('creditos/' + this.usuarioActual);
-
       starCountRef.on('value', (snap) => {
         var data = snap.val(); 
         for(var key in data ) {
@@ -196,9 +195,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   MostrarCargaCredito() { 
-
     var contadorCredito = 0;
-    // this.CargarArrayCreditosPorUsuario();
     this.creditos.forEach(resp => {
       if (resp.usuario == this.usuarioActual) {
          contadorCredito += resp.credito;
@@ -215,7 +212,6 @@ export class HomePage implements OnInit, OnDestroy {
         this.creditoActual = 0;
         this.BorradoExitoso('Cargas borradas');
       });
-
   }
 
   salir() {
