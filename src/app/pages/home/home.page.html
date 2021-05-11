@@ -1,32 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button
-        style="font-family: Arial, Helvetica, sans-serif;"
-        defaultHref="/"
-        text="Regresar"
-        color="primary"
-        mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button style="font-family: Arial, Helvetica, sans-serif;" defaultHref="/" text="Volver"
+        color="primary" mode="ios">
       </ion-back-button>
-      </ion-buttons>
-      <ion-title class="tituloHeader">
-       Principal
-         <ion-icon class="ionIcon" src="./assets/sign-out-alt-solid.svg" (click)="salir()"></ion-icon>
-       </ion-title>
-    </ion-toolbar>
-  </ion-header> 
+    </ion-buttons>
+    <ion-title  class="tituloHeader" style="margin-left: 25%;">
+      Principal
+    </ion-title>
+    <ion-icon class="ionIcon" src="./assets/sign-out-alt-solid.svg" 
+    slot="end" style="margin-right: 5%;" (click)="salir()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content  [style.--background]="scanActive ? '#ffffff00' : style">
+<ion-content [style.--background]="scanActive ? '#ffffff00' : style">
   <ion-spinner name="lines" *ngIf="mostrar" class="unSpinner"></ion-spinner>
   <ion-card class="card">
     <ion-card-content [hidden]="scanActive">
-      <h2>{{creditoActual}}</h2>      
-      <h2>{{mensajeAlerta}}</h2>
+      <h1>Crédito actual: ${{creditoActual}}</h1><br>
+      <small>Escanee un código para agregar saldo a su cuenta</small>
     </ion-card-content>
   </ion-card>
 
   <button class="btnGigante colorTerciario" (click)="cargarCredito()" [hidden]="scanActive">Cargar Crédito</button>
-  <button class="btnGigante colorTerciario" (click)="borrarCredito()" [hidden]="scanActive">Borrar Crédito</button>
+  <button class="btnSemiGigante colorTerciario" (click)="borrarCredito()" [hidden]="scanActive">Borrar Crédito</button>
   <p class="ion-text-center" *ngIf="result && !scanActive">{{result}}</p>
 
 
