@@ -1,3 +1,12 @@
 .card-contain {
-    background: rgba(243, 243, 243, 0.95);;
+    background: rgba(243, 243, 243, 0.95);
 }
+
+.action-sheet-group {
+    background:  rgba(243, 243, 243, 0.95);
+  }
+  
+  /* Works - pass "my-custom-class" in cssClass to increase specificity */
+  .my-custom-class .action-sheet-group {
+    background:  rgba(243, 243, 243, 0.95);
+  }

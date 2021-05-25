@@ -11,3 +11,5 @@ ion-content{
 .card-contain {
     background: rgba(243, 243, 243, 0.95);
 }
+
+@keyframes appear{from{left:0px;opacity:1} to{left:350;opacity:1}}
