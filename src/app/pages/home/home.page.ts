@@ -38,7 +38,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.freno(300).then(() => {
       this.mostrar = false;
     });
-  }d
+  }
 
   ngOnInit() {
     this.usuarioActual = localStorage.getItem('usuarioActual');
